@@ -1,1 +1,1 @@
-# recipes-by-appliance
+# Recipes by Appliance
