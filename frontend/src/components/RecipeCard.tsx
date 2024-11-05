@@ -1,9 +1,9 @@
 import { Recipe } from "../types";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 interface Props {
     recipe: Recipe;
-    isFavorite: boolean;
+    isFavorite : boolean;
     onClick: () => void;
     onFavoriteButtonClick: (recipe: Recipe) => void;
 }
