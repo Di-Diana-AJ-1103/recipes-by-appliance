@@ -1,5 +1,5 @@
 const apiKey = process.env.API_KEY;
-const searchRecipes = async (searchTerm: string, page:number) => {
+export const searchRecipes = async (searchTerm: string, page:number) => {
     if(!apiKey){
         throw new Error("Missing API key");
     }
@@ -22,3 +22,33 @@ const searchRecipes = async (searchTerm: string, page:number) => {
         console.log(error);
     }
 };
+
+export const getRecipeSummary = async (recipeId:string) => {
+    if(!apiKey){
+        throw new Error("Missing API key");
+    }
+    const url = new URL(`https://api.spoonacular.com/recipes/${recipeId}/summary`);
+    const params = {
+        apiKey: apiKey
+    }
+    url.search = new URLSearchParams(params).toString();
+    const response = await fetch(url);
+    const json = await response.json();
+    return json;
+};
+
+export const getFavoriteRecipesByIDs = async (ids:string[]) => {
+    if(!apiKey){
+        throw new Error("Missing API key");
+    }
+    const url = new URL("https://api.spoonacular.com/recipes/informationBulk");
+    const params = {
+        apiKey: apiKey,
+        ids: ids.join(",")
+    }
+    url.search = new URLSearchParams(params).toString();
+
+    const searchResponse = await fetch(url);
+    const json = await searchResponse.json();
+    return {results: json};
+}
